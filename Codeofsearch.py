@@ -1,51 +1,63 @@
 import re
 
 
-def function(search_karna):
-    file = open("LGPL.txt", "rt")
-    outputvalifile = open(search_karna + ".txt", "a")
-    filetostring = file.read()
-    for ch in ['\\n', '`', '*', '_', '{', '}', '[', ']', '(', ')', '>', '#', '+', '-', '.', '!', '$', '\'', '@',
-               str([0 - 9]), '(', ')', ',', '"', '\\xc0', '<', ";"]:
-        if ch in filetostring:
-            filetostring = filetostring.replace(ch, " ")
+# Creating Class
+class Searching:
+    # Function for searching the line and initializing the counter
+    def function(self, word):
 
-    # print(filetostring)
-    filetostring = filetostring.upper()
-    # print(filetostring)
-    filekosplit = filetostring.split("\n")
-    # print(filekosplit)
-    search_karna = search_karna
-    search_karna = search_karna.upper()
-    print(search_karna)
+        self.word = word
+        file = open("LGPL.txt", "rt")
+        # file created with the name and include the number of occurrence
+        outputfile = open(self.word + ".txt", "a")
+        filetostring = file.read()
+        # To remove the special character in the code
+        for ch in ['\\n', '`', '*', '_', '{', '}', '[', ']',
+                   '(', ')', '>', '#', '+', '-', '.',
+                   '!', '$', '\'', '@', str([0 - 9]),
+                   '(', ')', ',', '"', '\\xc0', '<', ";"]:
+            if ch in filetostring:
+                filetostring = filetostring.replace(ch, " ")
 
-    # yaha par length nikali jo ki ye bateyegi ki kitni baar occur hua hai
+        # print(filetostring)
+        filetostring = filetostring.upper()
+        # print(filetostring)
+        file_split = filetostring.split("\n")
+        # print(file_split)
+        self.word = self.word
+        self.word = self.word.upper()
+        # print(self.word)
 
-    occurence = re.findall(search_karna, filetostring)  # regx
-    length_occurence = len(occurence)
-    print(length_occurence)
-    file_ko_split_karene_ke_baad_doobara_split = []
-    # yaha par hamne search opetration kia hai
-    for i in range(len(filekosplit)):
-        file_ko_split_karene_ke_baad_doobara_split = filekosplit[i].split(" ")
-        # print(file_ko_split_karene_ke_baad_doobara_split)
-        for j in range(len(file_ko_split_karene_ke_baad_doobara_split)):
-            if re.findall(search_karna, file_ko_split_karene_ke_baad_doobara_split[j]):
-                if j == 0:
-                    outputvalifile.write(file_ko_split_karene_ke_baad_doobara_split[j] + " " +
-                                         file_ko_split_karene_ke_baad_doobara_split[j + 1]+"\n")
-                elif j == len(file_ko_split_karene_ke_baad_doobara_split) - 1:
-                    outputvalifile.write(file_ko_split_karene_ke_baad_doobara_split[j - 1] + " " +
-                                         file_ko_split_karene_ke_baad_doobara_split[j]+"\n")
-                else:
-                    outputvalifile.write(file_ko_split_karene_ke_baad_doobara_split[j - 1] + " " +
-                                         file_ko_split_karene_ke_baad_doobara_split[j] + " " +
-                                         file_ko_split_karene_ke_baad_doobara_split[j + 1]+"\n")
+        # To Find the length and fill the data inside the file
+
+        occurence = re.findall(self.word, filetostring)  # regx
+        length_occurence = str(len(occurence)) + "\n"
+        outputfile.write(length_occurence)
+        file_split_double = []
+        # Searching of the specific key in the txt file
+        for i in range(len(file_split)):
+            file_split_double = file_split[i].split(" ")
+            # print(file_split_double)
+            for j in range(len(file_split_double)):
+                if re.findall(self.word, file_split_double[j]):
+                    if j == 0:
+                        outputfile.write(file_split_double[j] +
+                                         " " + file_split_double[j + 1] + "\n")
+                    elif j == len(file_split_double) - 1:
+                        outputfile.write(file_split_double[j - 1] +
+                                         " " + file_split_double[j] + "\n")
+                    else:
+                        outputfile.write(file_split_double[j - 1] + " " +
+                                         file_split_double[j] + " " +
+                                         file_split_double[j + 1] + "\n")
 
 
-word = []
-for i in range(5):
-    a = input()
-    word.append(a)
-for i in range(5):
-    function(word[i])
+if __name__ == '__main__':
+    # Take the input data
+    input_data = []
+    # Pushing the data to the class
+    obj1 = Searching()
+    for i in range(5):
+        input_data.append(input("Enter the words" + '\n'))
+    for i in range(5):
+        obj1.function(input_data[i])
