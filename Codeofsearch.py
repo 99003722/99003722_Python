@@ -33,14 +33,14 @@ def function(search_karna):
             if re.findall(search_karna, file_ko_split_karene_ke_baad_doobara_split[j]):
                 if j == 0:
                     outputvalifile.write(file_ko_split_karene_ke_baad_doobara_split[j] + " " +
-                                         file_ko_split_karene_ke_baad_doobara_split[j + 1])
+                                         file_ko_split_karene_ke_baad_doobara_split[j + 1]+"\n")
                 elif j == len(file_ko_split_karene_ke_baad_doobara_split) - 1:
                     outputvalifile.write(file_ko_split_karene_ke_baad_doobara_split[j - 1] + " " +
-                                         file_ko_split_karene_ke_baad_doobara_split[j])
+                                         file_ko_split_karene_ke_baad_doobara_split[j]+"\n")
                 else:
                     outputvalifile.write(file_ko_split_karene_ke_baad_doobara_split[j - 1] + " " +
                                          file_ko_split_karene_ke_baad_doobara_split[j] + " " +
-                                         file_ko_split_karene_ke_baad_doobara_split[j + 1])
+                                         file_ko_split_karene_ke_baad_doobara_split[j + 1]+"\n")
 
 
 word = []
